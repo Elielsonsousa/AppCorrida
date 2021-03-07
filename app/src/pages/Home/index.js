@@ -317,7 +317,7 @@ const Home = ({navigation}) => {
           {user.tipo === 'M' && rideStatus() === 'empty' && (
             <Container>
               <SubTitle>Olá, Juliana.</SubTitle>
-              <Title>Nenhuma corrida encontrada.</Title>
+              <Title>Procurando corrida...</Title>
             </Container>
           )}
 

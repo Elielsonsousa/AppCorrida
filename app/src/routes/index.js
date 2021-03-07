@@ -22,7 +22,8 @@ const Routes = () => (
         component={Login}
       />
       <Stack.Screen
-        options={{headerShown: false}}
+      
+     //   options={{headerShown: false}}
         name="Type"
         component={Type}
       />
@@ -33,7 +34,7 @@ const Routes = () => (
       />
       <Stack.Screen options={{headerShown: false}} name="Car" component={Car} />
       <Stack.Screen
-        options={{headerShown: false}}
+        //options={{headerShown: false}}
         name="Home"
         component={Home}
       />

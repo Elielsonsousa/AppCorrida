@@ -6,25 +6,25 @@ const user = new Schema({
   fbId: { type: String, required: true },
   nome: { type: String, required: true },
   email: { type: String, required: true },
-  cpf: {
+  cpf: {// retorna um cpf aleatorio, modificar depois
     type: String,
     default: () => {
       return generate();
     },
   },
-  tipo: {
+  tipo: {//só aceita esses 2 tipos
     type: String,
     enum: ['M', 'P'],
     required: true,
   },
   accessToken: { type: String, required: true },
-  recipientId: {
+  recipientId: {//cadastra/pede o cartão p o motorista receber
     type: String,
     required: function () {
       return this.tipo === 'M';
     },
   },
-  location: {
+  location: {// faz com que o Mongoose faça uma pesquisa por aproximação
     type: { type: String },
     coordinates: [],
   },

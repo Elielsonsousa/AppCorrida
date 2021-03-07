@@ -8,26 +8,28 @@ const User = require('../models/user');
 const Car = require('../models/car');
 const PaymentMethod = require('../models/paymentMethod');
 const Ride = require('../models/ride');
-
+ 
 const keys = require('../data/keys.json');
 
 router.post('/signup', async (req, res) => {
+  
   const db = mongoose.connection;
   const session = await db.startSession();
-  session.startTransaction();
+  session.startTransaction();/*se algo der errado(no cadastro) o mongoose volta 
+  td e cancela o cadastro do passageiro, ex: se o cartão n for aprovado. isso deve ser mudado p nova app*/
 
   try {
     const { user, car, paymentMethod } = req.body;
     let finalUser = {};
-
+    
     if (user.tipo === 'M') {
-      // CADASTRAR RECEBEDOR
+      //se for motorista CADASTRAR RECEBEDOR. na nova app tem que mudar
       const createRecipient = await pagarme.createRecipient({
         name: user.nome,
         email: user.email,
       });
 
-      if (createRecipient.error) {
+      if (createRecipient.error) {//se der algum erro, invocamos a msg da api
         throw createRecipient.message;
       }
 
@@ -62,11 +64,12 @@ router.post('/signup', async (req, res) => {
       }).save({ session });
     }
 
-    await session.commitTransaction();
+    await session.commitTransaction();//se der td certo, envia pra o BD
     session.endSession();
 
     res.json({ error: false, user: finalUser });
   } catch (err) {
+       console.log("erro em 'api.routes.js " + err)
     await session.abortTransaction();
     session.endSession();
     res.json({ error: true, message: err.message });
@@ -81,11 +84,12 @@ router.post('/check-user', async (req, res) => {
 
     res.json({ error: false, user });
   } catch (err) {
+    console.log("erroa ao checar se o user existe"+ err)
     res.json({ error: true, message: err.message });
   }
 });
 
-router.put('/location/:id', async (req, res) => {
+router.put('/location/:id', async (req, res) => {//pega a localização do ususario
   try {
     const { io } = req.app;
     const { id } = req.params;
@@ -104,6 +108,7 @@ router.put('/location/:id', async (req, res) => {
 
     res.json({ error: false });
   } catch (err) {
+    console.log("erro ao pegar a localização" + err)
     res.json({ error: true, message: err.message });
   }
 });
@@ -127,7 +132,7 @@ router.get('/address/:address', async (req, res) => {
   try {
     const list = await googleMaps.getPlaces(
       encodeURIComponent(req.params.address)
-    );
+    );  
 
     if (list.error) {
       throw list.message;
@@ -163,7 +168,7 @@ router.post('/pre-ride', async (req, res) => {
       duration,
       start_address,
       end_address,
-      steps,
+      steps,//cria a rota no mapa
     } = routeRequest.data.routes[0].legs[0];
 
     const route = steps
@@ -181,8 +186,8 @@ router.post('/pre-ride', async (req, res) => {
       })
       .flat(1);
 
-    const price = ((distance.value / 1000) * 2.67).toFixed(2);
-
+    const price = ((distance.value / 1000) * 1.50).toFixed(2);//calcula o preço da corria
+    //fazer a variavel do tempo tmb...
     res.json({
       error: false,
       info: { distance, duration, start_address, end_address, route, price },
@@ -321,12 +326,12 @@ router.post('/accept-ride', async (req, res) => {
         name: 'Trinity Moss',
         address: {
           country: 'br',
-          state: 'sp',
-          city: 'Cotia',
-          neighborhood: 'Rio Cotia',
-          street: 'Rua Matrix',
+          state: 'PE',
+          city: 'Recife',
+          neighborhood: 'Pina',
+          street: 'Rua dos navegantes',
           street_number: '9999',
-          zipcode: '06714360',
+          zipcode: '55714360',
         },
       },
       items: [

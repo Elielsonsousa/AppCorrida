@@ -11,10 +11,10 @@ import bgBottom from '../../assets/bg-bottom-login.png';
 
 import {Container, Button, ButtonText} from '../../styles';
 import graph from '../../services/facebook';
+import '../../config/reactotron';
 
 const Login = ({navigation}) => {
   const dispatch = useDispatch();
-
   const login = async () => {
     try {
       const auth = await social.authorize('facebook', {
@@ -39,17 +39,16 @@ const Login = ({navigation}) => {
     }
   };
 
-
-  const checkLogin = async () => {
-    //AsyncStorage.clear();
+  const checkLogin = async () => {//verifica se já tem o user
+  //  AsyncStorage.clear();
     const user = await AsyncStorage.getItem('@user');
     if (user) {
       dispatch(updateUser(JSON.parse(user)));
-      navigation.replace('Home');
+      navigation.replace('Home'); //aqui substitui a tela, impossibilitando voltar p anterior
     }
   };
 
-  useEffect(() => {
+  useEffect(() => {//td vez que abrir o app, é checado se o user existe
     checkLogin();
   }, []);
 

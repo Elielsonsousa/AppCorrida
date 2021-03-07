@@ -1,6 +1,6 @@
 {
-  "api_key": "SUA_KEY_DO_PAGARME",
-  "google_maps_api": "SUA_KEY_DO_GOOGLE_MAPS",
-  "recipient_id": "SEU_RECIPIENT_DO_PAGARME",
+  "api_key": "ak_test_TsfokZ1SDHoaQ6lVyq7LApez1mVloW",
+  "google_maps_api": "AIzaSyDSHSSZjuGxGgk2S5T9yYi1Z06VNqLPXj4",
+  "recipient_id": "ak_test_TsfokZ1SDHoaQ6lVyq7LApez1mVloW",
   "app_fee": 15
 }

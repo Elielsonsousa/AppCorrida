@@ -3,14 +3,7 @@ import {Image} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {updateUser} from '../../store/modules/app/actions';
 
-import {
-  Container,
-  Button,
-  ButtonText,
-  Title,
-  SubTitle,
-  PickerButton,
-} from '../../styles';
+import { Container,Button,ButtonText,Title,SubTitle,PickerButton,} from '../../styles';
 
 import car from '../../assets/car.png';
 import hand from '../../assets/hand.png';

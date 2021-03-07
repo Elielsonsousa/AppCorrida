@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const URI = 'mongodb://localhost:27017/AppCorrida?replicaSet=rs';
+const URI = 'mongodb://localhost:27017/AppCorrida';
 /** o replicaSet faz com que, caso haja algum erro no cadastro, impossibilite-o 
  * ex: caso o cartão n seja aprovado o cadastro n continurará*/
 

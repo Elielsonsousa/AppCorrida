@@ -21,7 +21,7 @@ const ride = new Schema({
     enum: ['A', 'C', 'F'], // ACTIVE, CANCELED, FINISHED,
     default: 'A',
   },
-  transactionId: {
+  transactionId: {//saber se o status da transação no pagar.me
     type: String,
     required: true,
   },
