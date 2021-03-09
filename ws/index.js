@@ -6,7 +6,6 @@ const http = require('http');
 
 app.use(morgan('dev'));
 app.use(express.json());
-app.set('port', process.env.PORT || 8000);
 
 app.use('/', require('./src/routes/api.routes'));
 
@@ -18,6 +17,4 @@ io.sockets.on('connection', (socket) => {
   console.log('Conectou => ' + socket.id);
 });
 
-server.listen(app.get('port'), () => {
-  console.log('Servidor rodando na porta => ' + app.get('port'));
-});
+module.exports = app;
