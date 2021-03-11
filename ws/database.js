@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const URI = 'mongodb://localhost:27017/AppCorrida';
+const URI = 'mongodb://Felipe:27017,Felipe:27018,Felipe:27019/DriverLity?replicaSet=rs';
 /** o replicaSet faz com que, caso haja algum erro no cadastro, impossibilite-o 
  * ex: caso o cartão n seja aprovado o cadastro n continurará*/
 
